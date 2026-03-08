@@ -821,7 +821,6 @@
       } = values;
 
       const rate = Math.pow(1 + jurosAnual / 100, 1 / 12) - 1;
-      const trRate = trMensal / 100;
       let saldo = principal;
       const amortizacaoBase = prazoFinanciamento > 0 ? principal / prazoFinanciamento : 0;
       const schedule = [];
@@ -834,12 +833,11 @@
         month += 1;
         const juros = saldo * rate;
         const amortizacaoEfetiva = Math.min(saldo, amortizacaoBase + amortizacaoExtra);
-        const custoTR = principal * trRate;
-        const prestacao = juros + amortizacaoEfetiva + custoTR + taxaAdm + seguroMensal;
+        const prestacao = juros + amortizacaoEfetiva + seguroMensal;
         saldo = Math.max(0, saldo - amortizacaoEfetiva);
         totalPago += prestacao;
         totalJuros += juros;
-        totalExtras += custoTR + taxaAdm + seguroMensal;
+        totalExtras += seguroMensal;
         schedule.push({
           month,
           prestacao,
@@ -874,7 +872,6 @@
       } = values;
 
       const rate = Math.pow(1 + jurosAnual / 100, 1 / 12) - 1;
-      const trRate = trMensal / 100;
       let saldo = principal;
       const paymentBase = rate === 0
         ? (prazoFinanciamento > 0 ? principal / prazoFinanciamento : 0)
@@ -893,12 +890,11 @@
         if (amortizacao < 0) amortizacao = 0;
         amortizacao += amortizacaoExtra;
         amortizacao = Math.min(saldo, amortizacao);
-        const custoTR = principal * trRate;
-        const prestacao = juros + amortizacao + custoTR + taxaAdm + seguroMensal;
+        const prestacao = juros + amortizacao + seguroMensal;
         saldo = Math.max(0, saldo - amortizacao);
         totalPago += prestacao;
         totalJuros += juros;
-        totalExtras += custoTR + taxaAdm + seguroMensal;
+        totalExtras += seguroMensal;
         schedule.push({
           month,
           prestacao,
