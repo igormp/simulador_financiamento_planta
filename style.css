@@ -355,14 +355,34 @@ tbody tr:hover {
 }
 
 .summary-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
     margin-top: 12px;
 }
 
+.summary-subsection {
+    margin-bottom: 20px;
+}
+
+.summary-subsection:last-child {
+    margin-bottom: 0;
+}
+
+.summary-subsection-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+}
+
+.summary-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
 @media (max-width: 720px) {
-    .summary-list {
+    .summary-group {
         grid-template-columns: 1fr;
     }
 }

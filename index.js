@@ -465,28 +465,59 @@ function recalculate() {
     custoTotalEscolhido
   )} a ${formatBRL(Math.max(totalGeralSac, totalGeralPrice))}`;
 
-  el("resumoSimples").innerHTML = [
-    ["Valor do imóvel", formatBRL(values.valorImovel)],
-    ["Percentual financiado", formatPercent(values.percentualFinanciado)],
-    ["Valor financiado", formatBRL(values.valorFinanciado)],
-    ["Entrada bruta", formatBRL(values.valorEntrada)],
-    ["Benefícios abatendo entrada", formatBRL(values.valorBeneficios)],
-    ["Sinal", formatBRL(values.valorSinal)],
-    ["Saldo da entrada a parcelar", formatBRL(valorParceladoBase)],
-    ["1ª parcela da entrada", formatBRL(entrySchedule.first)],
-    ["Última parcela da entrada", formatBRL(entrySchedule.last)],
-    ["1ª evolução de obra", formatBRL(evolutionSchedule.first)],
-    ["Última evolução de obra", formatBRL(evolutionSchedule.last)],
-    ["1ª parcela SAC", formatBRL(sac.firstInstallment)],
-    ["1ª parcela PRICE", formatBRL(price.firstInstallment)],
-    ["Custo total estimado SAC", formatBRL(totalGeralSac)],
-    ["Custo total estimado PRICE", formatBRL(totalGeralPrice)],
-  ]
+  const summaryItem = (k, v) => `
+    <div class="summary-item">
+      <div class="k">${k}</div>
+      <div class="v">${v}</div>
+    </div>
+  `;
+
+  const subsections = [
+    {
+      title: "Imóvel e financiamento",
+      items: [
+        ["Valor do imóvel", formatBRL(values.valorImovel)],
+        ["Percentual financiado", formatPercent(values.percentualFinanciado)],
+        ["Valor financiado", formatBRL(values.valorFinanciado)],
+      ],
+    },
+    {
+      title: "Entrada",
+      items: [
+        ["Entrada bruta", formatBRL(values.valorEntrada)],
+        ["Benefícios abatendo entrada", formatBRL(values.valorBeneficios)],
+        ["Sinal", formatBRL(values.valorSinal)],
+        ["Saldo da entrada a parcelar", formatBRL(valorParceladoBase)],
+        ["1ª parcela da entrada", formatBRL(entrySchedule.first)],
+        ["Última parcela da entrada", formatBRL(entrySchedule.last)],
+      ],
+    },
+    {
+      title: "Obra",
+      items: [
+        ["1ª evolução de obra", formatBRL(evolutionSchedule.first)],
+        ["Última evolução de obra", formatBRL(evolutionSchedule.last)],
+      ],
+    },
+    {
+      title: "Financiamento após as chaves",
+      items: [
+        ["1ª parcela SAC", formatBRL(sac.firstInstallment)],
+        ["1ª parcela PRICE", formatBRL(price.firstInstallment)],
+        ["Custo total estimado SAC", formatBRL(totalGeralSac)],
+        ["Custo total estimado PRICE", formatBRL(totalGeralPrice)],
+      ],
+    },
+  ];
+
+  el("resumoSimples").innerHTML = subsections
     .map(
-      ([k, v]) => `
-        <div class="summary-item">
-          <div class="k">${k}</div>
-          <div class="v">${v}</div>
+      (sec) => `
+        <div class="summary-subsection">
+          <h3 class="summary-subsection-title">${sec.title}</h3>
+          <div class="summary-group">
+            ${sec.items.map(([k, v]) => summaryItem(k, v)).join("")}
+          </div>
         </div>
       `
     )
