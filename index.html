@@ -127,19 +127,19 @@
           </div>
         </div>
 
-        <div class="panel" style="margin-bottom: 16px;">
-          <div class="section-title">
+        <details class="panel collapsible" open style="margin-bottom: 16px;">
+          <summary class="section-title">
             <h2>Resumo simples</h2>
             <span class="badge" id="badgeQuitacao">Sem amortização extra</span>
-          </div>
+          </summary>
           <div class="summary-list" id="resumoSimples"></div>
-        </div>
+        </details>
 
-        <div class="panel" style="margin-bottom: 16px;">
-          <div class="section-title">
+        <details class="panel collapsible" open style="margin-bottom: 16px;">
+          <summary class="section-title">
             <h2>Obra + entrada</h2>
             <div class="mini-note">Parcelas da entrada corrigidas por INCC composto</div>
-          </div>
+          </summary>
           <div class="two-cols">
             <div class="highlight-box">
               <h3>Resumo da entrada</h3>
@@ -164,13 +164,13 @@
               <tbody id="tabelaObra"></tbody>
             </table>
           </div>
-        </div>
+        </details>
 
-        <div class="panel">
-          <div class="section-title">
+        <details class="panel collapsible">
+          <summary class="section-title">
             <h2>Financiamento após as chaves</h2>
             <div class="mini-note">Comparativo entre SAC e PRICE</div>
-          </div>
+          </summary>
           <div class="two-cols">
             <div>
               <h3>SAC</h3>
@@ -240,10 +240,10 @@
           </div>
 
           <p class="footer-note">
-            Nesta implementação, a prestação exibida do financiamento soma: parcela do sistema (SAC ou PRICE) + TR mensal aplicada como custo informado + seguro + taxa de administração.
+            Nesta implementação, a prestação exibida do financiamento soma: parcela do sistema (SAC ou PRICE) + seguro.
             A amortização extra mensal reduz o saldo devedor e pode antecipar a quitação.
           </p>
-        </div>
+        </details>
       </section>
     </div>
   </div>
